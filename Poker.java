@@ -6,7 +6,6 @@ public class Poker {
   private int[] currHandSuit = new int[5];
   private int[] currHandValues = new int[5];
 
-
   public void pushCard(char type, int value) {
     // we do value - 1 because the Ace card starts at 0 rather than 1
     switch (type) {
@@ -55,21 +54,17 @@ public class Poker {
     }
     Arrays.sort(currHandValues);
 
-    // full house:3 cards of one rank, two cards of another rank
-    if(this.fullHouse())
-      System.out.println("The hand is a full house.");
-
     // straight flush
-    else if(this.straight() && this.flush())
+    if(this.straight() && this.flush())
       System.out.println("The hand is a straight flush.");
 
-    // two pair
-    else if(this.pair(2))
-      System.out.println("The hand is a two pair.");
+    // four-of-a-kind
+    else if(this.ofAKind(4,"-1")[0] == "true")
+      System.out.println("The hand is a four-of-a-kind.");
 
-    // one pair
-    else if(this.pair(1))
-      System.out.println("The hand is a one pair.");
+    // full house:3 cards of one rank, two cards of another rank
+    else if(this.fullHouse())
+      System.out.println("The hand is a full house.");
 
     // flush: all cards have the same suit
     else if(this.flush())
@@ -79,13 +74,17 @@ public class Poker {
     else if(this.straight())
       System.out.println("The hand is a straight.");
 
-    // four-of-a-kind
-    else if(this.ofAKind(4))
-      System.out.println("The hand is a four-of-a-kind.");
-
     // three-of-a-kind
-    else if(this.ofAKind(3))
+    else if(this.ofAKind(3,"-1")[0] == "true")
       System.out.println("The hand is a three-of-a-kind.");
+
+    // two pair
+    else if(this.pair(2))
+      System.out.println("The hand is a two pair.");
+
+    // one pair
+    else if(this.pair(1))
+      System.out.println("The hand is a one pair.");
 
     // none of the above
     else
@@ -136,72 +135,53 @@ public class Poker {
     return consecutive;
   }
 
-  public boolean ofAKind(int numCards) {
-    boolean result = false;
+  public String[] ofAKind(int numCards, String kind) {
+    String result[] = {"false",""};
     int count = 0;
-    for(int i=0; i<4; i++) {
-      for(int j=0; j<13; j++) {
-        if(pokerHand[i][j] == 1)
+    int val;
+    int thisKind = Integer.parseInt(kind);
+
+    for(int i=0;i<currHandValues.length;i++) {
+      val = currHandValues[i];
+      count = 0;
+
+      for(int j=i+1;j<currHandValues.length;j++) {
+        if(currHandValues[j] == val) {
           count++;
-      }
-      // System.out.printf("%d: %d\n",i,count);
-      if(count == numCards) {
-        return true;
-      }
-      else {
-        result = false;
-        count = 0;
+          if(count == (numCards-1) && val != thisKind) {
+            result[0] = "true";
+            result[1] = Integer.toString(val);
+            return result;
+          }
+        }
       }
     }
     return result;
   }
 
   public boolean fullHouse() {
-    if(this.ofAKind(3) && this.ofAKind(2))
-      return true;
-    else
-      return false;
+    if(this.ofAKind(3,"-1")[0] == "true") {
+      String val = this.ofAKind(3,"-1")[1];
+      if(this.ofAKind(2,val)[0] == "true")
+        return true;
+    }
+    return false;
   }
 
   public boolean pair(int numPairs) {
     boolean isPair = false;
-    int count = 0;
-    int checker = -1;
-    int firstPair = 0;
-    int a = 0;
 
-    while(a < numPairs) {
-      for(int i=1; i<currHandValues.length; i++) {
-        if(a != 0) {
-          for(int j=1; i<currHandValues.length; i++) {
-            if(currHandValues[j] !=  checker)
-              checker = currHandValues[j];
-          }
-          if(checker != firstPair && checker == currHandValues[i]) {
-            count++;
-            firstPair =  checker;
-            break;
-          }
-          else
-            continue;
-        }
-        else {
-          checker = currHandValues[0];
-          if(checker == currHandValues[i]) {
-            count++;
-            firstPair =  checker;
-            break;
-          }
-          else
-            continue;
-        }
-      }
-      a++;
+    if(numPairs == 1) {
+      if(this.ofAKind(2,"-1")[0] == "true")
+        isPair = true;
     }
-
-    if(count == numPairs)
-      return true;
-    else
-      return false;
+    else {
+      if(this.ofAKind(2,"-1")[0] == "true") {
+        String val = this.ofAKind(2,"-1")[1];
+        if(this.ofAKind(2,val)[0] == "true")
+          isPair = true;
+      }
+    }
+    return isPair;
   }
 }
