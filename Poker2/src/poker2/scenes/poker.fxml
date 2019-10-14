@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="400.0" prefWidth="461.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poker2.PokerController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" text="Open…" />
+            <Menu mnemonicParsing="false" text="Open Recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Revert" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="372.0" prefWidth="443.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Text layoutX="33.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rank:" />
+            <Text layoutX="33.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ace=1, Jack=11," />
+            <Text layoutX="33.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Queen=12, King=13" />
+            <Text layoutX="306.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suit: Diamons=D," />
+            <Text layoutX="306.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hearts=H, Clubs=C," />
+            <Text layoutX="306.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spades=S" />
+            <Group layoutX="48.0" layoutY="90.0">
+               <children>
+                  <Label id="card1_label" layoutY="5.0" text="Card #1:" />
+                  <TextField id="card1_input" fx:id="card1_input" layoutX="65.0" />
+                  <TextField id="card1_suit" fx:id="card1_suit" layoutX="305.0" prefHeight="27.0" prefWidth="61.0" />
+               </children>
+            </Group>
+            <Group layoutX="48.0" layoutY="117.0">
+               <children>
+                  <Label id="card2_label" layoutY="15.0" text="Card #2:" />
+                  <TextField id="card2_input" fx:id="card2_input" layoutX="65.0" layoutY="10.0" />
+                  <TextField id="card2_suit" fx:id="card2_suit" layoutX="305.0" layoutY="10.0" prefHeight="27.0" prefWidth="61.0" />
+               </children>
+            </Group>
+            <Group layoutX="48.0" layoutY="166.0">
+               <children>
+                  <Label id="card3_label" layoutY="5.0" text="Card #3:" />
+                  <TextField id="card3_input" fx:id="card3_input" layoutX="65.0" />
+                  <TextField id="card3_suit" fx:id="card3_suit" layoutX="306.0" prefHeight="27.0" prefWidth="61.0" />
+               </children>
+            </Group>
+            <Group layoutX="48.0" layoutY="193.0">
+               <children>
+                  <Label id="card4_label" layoutY="15.0" text="Card #4:" />
+                  <TextField id="card4_input" fx:id="card4_input" layoutX="65.0" layoutY="10.0" />
+                  <TextField id="card4_suit" fx:id="card4_suit" layoutX="306.0" layoutY="10.0" prefHeight="27.0" prefWidth="61.0" />
+               </children>
+            </Group>
+            <Group layoutX="47.0" layoutY="235.0">
+               <children>
+                  <Label id="card5_label" layoutY="5.0" text="Card #5:" />
+                  <TextField id="card5_input" fx:id="card5_input" layoutX="65.0" />
+                  <TextField id="card5_suit" fx:id="card5_suit" layoutX="307.0" prefHeight="27.0" prefWidth="61.0" />
+               </children>
+            </Group>
+            <Button id="submit" fx:id="submit" layoutX="156.0" layoutY="284.0" mnemonicParsing="false" onAction="#displayResult" text="Display Type of Hand" />
+            <Label id="result" fx:id="result" layoutX="151.0" layoutY="321.0" text="This hand is a full striaght." />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>
